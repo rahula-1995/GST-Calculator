@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Income Tax Calculator - Calculate your Taxes Online for FY 2019-20</title>
+
+
+
+<head>
+	 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Income Tax calculator online</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+<style type="text/css">
+	
+	.tax-sub-title input{border: 1px solid #ccc;border-radius: 5px;width: 320px;height: 40px;margin:20px 0}
+	.select-gender{position: relative;margin-left: 5px}
+    .select-gender .dropdown-menu{background: #fff;width: 320px;border: 1px solid #ccc;margin-top:-15px }
+    .select-gender .dropdown-menu a{display: block;padding: 5px 0 5px 15px;font-size: 16px;font-weight: normal;color: #555;}
+    .select-gender .dropdown-menu a:hover{background: #ccc}
+    .select-gender .dropdown-toggle::after {display: inline-block;width: 0;height: 0;margin-left: .255em;vertical-align: .255em;content: "";border-top: .3em solid;border-right: .3em solid transparent;border-bottom: 0;border-left: .3em solid transparent;left: 90%;top: 20px;}
+    .dropdown.select-gender.open .dropdown-menu{display:block;}
+    .dropdown.select-gender .dropdown-menu{display: none;position: absolute;z-index: 1;}
+    .header-container {
+    	background-color: lightgreen;
+    	color: blue;
+
+    	text-align: center;
+
+    }
+    h3{
+    	color:#04218c;
+    	margin-left: 5px;
+    }
+    h2{
+    	color:red;
+
+    }
+    strong{
+    	color:blue;
+    }
+    .details h2{
+    	text-align: center;
+    	color: blue;
+    	background-color: red;
+    }
+    .details{
+    	background-color: #ff7600
+    }
+    .assessment-years h3{
+    	color:#04218c;
+
+    }
+    .btn{
+    	margin-left: 10px;
+    	font-size:15px;
+    	width: 150px;
+    	
+    }
+
+    .tax-breakup-section .right {
+    padding: 10px;
+    display: inline-block;
+    width:50%;
+    color: #38acc9;
+    position: absolute;
+    right: 32px;}
+    .tax-breakup {
+
+    background: #F7F7F7;
+    padding: 20px;
+    margin-bottom: 15px;
+    font-size: 18px;}
+    body{
+    	background-color: lightblue
+    }
+</style>
+    
+</head>
+<body>
+	<div class="header-container">
+		<h2>INCOME TAX Calculator</h2>
+		<h3>Calculate Your Tax online </h3>
+	</div>
+	<div class="details">
+		<form method="POST">
+		<h2>Please Fill The Basic Details</h2>
+		<div class="assessment-years" id="assessmentyearsection">
+			<h3>Plz Choose The Assessment Year</h3>
+			<label class="badge">
+                            
+                            <input type="radio" name="assessmentyear" checked required="required" onclick="assessmentYearValue(this.value)" value="2020-2021">
+                            <span>2020-2021</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="assessmentyear" required="required" onclick="assessmentYearValue(this.value)" value="2019-2020">
+                            <span>2019-2020</span>
+                        </label>                        <label>
+                            <input type="radio" name="assessmentyear" required="required" onclick="assessmentYearValue(this.value)" value="2018-2019">
+                            <span>2018-2019</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="assessmentyear" required="required" onclick="assessmentYearValue(this.value)" value="2017-2018">
+                            <span>2017-2018</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="assessmentyear" required="required" onclick="assessmentYearValue(this.value)" value="2016-2017">
+                            <span>2016-2017</span>
+                        </label>
+			
+		</div>
+		<div class="tax-sub-title">
+                    <h3>choose gender category</h3>
+                    <div class="dropdown select-gender">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Male</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript:void(0)" id="male" onclick="Selecttaxpayer(this.innerHTML);">Male</a>
+                            <a class="dropdown-item" href="javascript:void(0)" id="female" onclick="Selecttaxpayer(this.innerHTML);">Female</a>
+                            <a class="dropdown-item" href="javascript:void(0)" id="seniorcitizion" onclick="Selecttaxpayer(this.innerHTML);">Senior Citizen</a>
+                            <a class="dropdown-item" href="javascript:void(0)" id="superseniorcitizion" onclick="Selecttaxpayer(this.innerHTML);">Super Senior Citizen</a>
+                        </div>
+                    </div>
+                </div>
+	<div class="income" id="collapseOneOneClick">
+		<h3>your Income details</h3>
+                            <div class="panel-collapse collapse in" id="collapseOneOne" style="height: auto;">
+                               
+		
+		
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="gross_salary">Gross annual income</label>
+                                            <input id="gross_salary" required="required" min="1" max="399999999" type="number" onkeypress="return isNumberKeyLarge(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="income_from_other_sources">Annual income from other sources</label>
+                                            <input type="number"   id="income_from_other_sources" min="0" max="399999999" onkeypress="return isNumberKeyLarge(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="income_from_interest">Annual income from interest</label>
+                                            <input type="number"   id="income_from_interest" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="income_from_let_out_house_property">Annual income from let-out house property (rental income)</label>
+                                            <input type="number"   id="income_from_let_out_house_property" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="interest_paid_on_home_loan">Annual interest paid on home loan (self-occupied) </label>
+                                            <input type="number"   id="interest_paid_on_home_loan" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="interest_paid_on_home_loan_let_out">Annual interest paid on home loan (let-out)</label>
+                                            <input type="number"   id="interest_paid_on_home_loan_let_out" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                    </div>
+                                
+                                  
+		
+	</div>
+	<div class="deduction" id="collapseTwoOneClick">
+		<h3>Deductions Details</h3>
+		 <div class="panel-collapse collapse" id="collapseTwoOne">
+		<div class="col-md-6 col-sm-6">
+                                            <label for="basic_deductions_80c">Basic Deductions u/s 80C</label>
+                                            <input type="number" id="basic_deductions_80c" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="interest_on_deposits_in_saving_account_80tta">Interest on deposits in saving account u/s 80TTA/TTB </label>
+                                            <input type="number" id="interest_on_deposits_in_saving_account_80tta" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="donation_to_charity_80g">Donation to charity u/s 80G </label>
+                                            <input type="number"   id="donation_to_charity_80g" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="medical_insurance_premium_80d">Medical Insurance Premium u/s 80D</label>
+                                            <input type="number"   id="medical_insurance_premium_80d" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="interest_on_educational_loan_80e">Interest on Educational Loan u/s 80E  </label>
+                                            <input type="number"   id="interest_on_educational_loan_80e" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+	</div>
+	<div class="Exemptions" id="collapseThreeone">
+		<h3>HRA Exemptions details</h3>
+
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="basic_salary_received">Basic salary received per annum</label>
+                                            <input type="number"   id="basic_salary_received" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="dearness_allowance_received">Dearness allowance (DA) received per annum</label>
+                                            <input type="number"   id="dearness_allowance_received" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="hra_received">HRA received per annum</label>
+                                            <input type="number"   id="hra_received" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label for="total_rent_paid">Total rent paid per annum</label>
+                                            <input type="number"   id="total_rent_paid" min="0" max="9999999" onkeypress="return isNumberKey(this.value);">
+                                        </div><br></br>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label>Do you live in a metro city?</label>
+                                            <p class="radio-section metro">
+                                                <label><input type="radio" name="metrocity" onclick="basicSalaryFromHra(this.value)" value="yes"><span>Yes</span></label>
+                                                <label><input type="radio" name="metrocity" onclick="basicSalaryFromHra(this.value)" value="no"><span>No</span></label>
+                                            </p>
+                                        </div><br></br>
+
+	</div>
+	<div class="tax-calculate">
+                    <button class="btn" type="submit" onclick="return calculatetax();">Calculate</button>
+                </div>
+            </form>
+	</div>
+
+	<div class="tax-breakup-section">
+    <div class="col-md-12 text-center">
+        <div class="arrow-down-blue"></div>
+    </div>
+    <div class="container">
+        <p class="tax-pay-heading">Income Tax Payable : <span class="mobile-align"><span>&#8377; <span id="incometaxpayablebold"> 0,00,000</span></span></span></p>
+        <div class="col-md-3"></div>
+        <div class="tax-breakup col-md-6 ">
+            <p class="sub-title">Your Tax Details:</p>
+            <div>
+                <p><span class="left">Total Income</span> <span class="right"><span>&#8377;</span><span id="total_income">0,00,000</span></span></p>
+                <p><span class="left">HRA Exemption</span> <span class="right"><span>&#8377;</span><span id="hraexemption">0,00,000</span></span></p>
+                <p> <span class="left">Deduction</span> <span class="right"><span>&#8377;</span><span id="deductions">0,00,000</span></span></p>
+                <p> <span class="left">Net Taxable Income</span> <span class="right"><span>&#8377;</span><span id="nettaxableincome">0,00,000</span></span></p>
+                <p> <span class="left">Income Tax Payable</span> <span class="right"><span>&#8377;</span><span id="incometaxpayable">0,00,000</span></span></p>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+</form>
+</div>
+
+
+<script>
+    //Input Validation
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        if(evt.length==7)
+            return false;
+        return true;
+    }
+
+    function isNumberKeyLarge(evt){
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        if(evt.length==9)
+            return false;
+        return true;
+    }
+
+    // Constant Values
+    const STANDARD_DEDUCTION_RATE_ON_INCOME_FROM_LET_OUT_PROPERTY = 30/100;
+    const MAXIMUM_DEDUCTION_ON_DONATION_TO_CHARITY_US_80G = 9999999;
+    const MAXIMUM_DEDUCTION_ON_INTEREST_ON_EDUCATIONAL_LOAN_US_80E = 9999999;
+    const MAXIMUM_DEDUCTION_ON_MEDICAL_INSURANCE_PREMIUM_US_80D = 9999999;
+    const maximum_deduction_on_interest_paid_on_home_loan_self_occupied = 200000;
+
+    // Variable Values
+    var minimum_income_amount = undefined;
+    var maximum_income_amount = undefined;
+    var tax_rate = undefined;
+    var maximum_deduction_on_interest_paid_on_home_loan = undefined;
+    var basic_salary_received = document.getElementById('basic_salary_received');
+    var income_from_let_out_house_property = document.getElementById('income_from_let_out_house_property');
+    var basic_salary_percentage_for_hra_for_city = 50/100;
+    var Basic_salary_deduction_from_total_rent_paid = 10/100;
+    var assesmentYear = "2020-2021";
+    var taxpayer = "Male";
+    var medical_insurance_premium_80d_max=Number(55000);
+    var interest_on_deposits_in_saving_account_80tta_max = 10000;
+    var basic_deductions_80c_max = 150000;
+
+    //Tax Payer Value Drop-down
+    function Selecttaxpayer(taxpayer){
+        document.getElementById('dropdownMenuButton').innerHTML = taxpayer ;
+    }
+
+    //Assessment Year
+    function assessmentYearValue(yearvalue){
+        assesmentYear = yearvalue;
+    }
+
+    //Basic Salary Percentage Form HRA - Is Metro or Non Metro
+    function basicSalaryFromHra(IsCity){
+        if (IsCity == "yes") {
+            basic_salary_percentage_for_hra_for_city = 50/100;
+        }
+        else if(IsCity == "no") {
+            basic_salary_percentage_for_hra_for_city = 40/100;
+        }
+    }
+
+    //Tax Slab Values
+    function taxValueBasedOnSlab(taxpayer,assesmentYears,slab){
+    if(slab == 1) {
+      if( assesmentYears == "2020-2021" || assesmentYears == "2019-2020" || assesmentYears == "2018-2019"){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 0;
+                    maximum_income_amount = 250000;
+                    tax_rate = 0;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 0;
+                    maximum_income_amount = 300000;
+                    tax_rate = 0;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 0;
+                    maximum_income_amount = 250000;
+                    tax_rate = 0;
+                }
+            }
+            else if((assesmentYears == "2017-2018") || (assesmentYears == "2016-2017")){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 0;
+                    maximum_income_amount = 250000;
+                    tax_rate = 0;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 0;
+                    maximum_income_amount = 300000;
+                    tax_rate = 0;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 0;
+                    maximum_income_amount = 250000;
+                    tax_rate = 0;
+                }
+            }
+        }
+        if(slab == 2) {
+          if(assesmentYears == "2020-2021" || assesmentYears == "2019-2020" || assesmentYears == "2018-2019"){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 250000;
+                    maximum_income_amount = 500000;
+                    tax_rate = 5/100;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 300000;
+                    maximum_income_amount = 500000;
+                    tax_rate = 5/100;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 250000;
+                    maximum_income_amount = 500000;
+                    tax_rate = 0;
+                }
+            }
+            else if((assesmentYears == "2017-2018") || (assesmentYears == "2016-2017")){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 250000;
+                    maximum_income_amount = 500000;
+                    tax_rate = 10/100;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 300000;
+                    maximum_income_amount = 500000;
+                    tax_rate = 10/100;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 250000;
+                    maximum_income_amount = 500000;
+                    tax_rate = 0;
+                }
+            }
+        }
+        if(slab == 3) {
+           if((assesmentYears == "2020-2021") || (assesmentYears == "2019-2020") || (assesmentYears == "2018-2019")){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 500000;
+                    maximum_income_amount = 1000000;
+                    tax_rate = 20/100;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 500000;
+                    maximum_income_amount = 1000000;
+                    tax_rate = 20/100;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 500000;
+                    maximum_income_amount = 1000000;
+                    tax_rate = 20/100;
+                }
+            }
+            else if((assesmentYears == "2017-2018") || (assesmentYears == "2016-2017")){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 500000;
+                    maximum_income_amount = 1000000;
+                    tax_rate = 20/100;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 500000;
+                    maximum_income_amount = 1000000;
+                    tax_rate = 20/100;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 500000;
+                    maximum_income_amount = 1000000;
+                    tax_rate = 20/100;
+                }
+            }
+        }
+        if(slab == 4) {
+            if((assesmentYears == "2020-2021") || (assesmentYears == "2019-2020") || (assesmentYears == "2018-2019")){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 1000000;
+                    maximum_income_amount = 999999999;
+                    tax_rate = 30/100;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 1000000;
+                    maximum_income_amount = 999999999;
+                    tax_rate = 30/100;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 1000000;
+                    maximum_income_amount = 999999999;
+                    tax_rate = 30/100;
+                }
+            }
+            else if((assesmentYears == "2017-2018") || (assesmentYears == "2016-2017")){
+                if((taxpayer == "Male") || (taxpayer == "Female")){
+                    minimum_income_amount = 1000000;
+                    maximum_income_amount = 999999999;
+                    tax_rate = 30/100;
+                }
+                else if (taxpayer == "Senior Citizen"){
+                    minimum_income_amount = 1000000;
+                    maximum_income_amount = 999999999;
+                    tax_rate = 30/100;
+                }
+                else if (taxpayer == "Super Senior Citizen"){
+                    minimum_income_amount = 1000000;
+                    maximum_income_amount = 999999999;
+                    tax_rate = 30/100;
+                }
+            }
+        }
+    }
+
+    //Tax Calculation
+    function calculatetax(){
+        var f = document.getElementsByTagName('form')[0];
+        if(f.checkValidity()) {
+            $('html, body').animate({
+                'scrollTop' : $(".tax-pay-heading").position().top
+            });
+
+            //Tax Calculation based on slab
+            totalTaxPayableBasedOnSlab();
+
+            return false;
+
+        } else {
+            var gross_salary_validate = document.getElementById('gross_salary').value
+            var panelTwo = document.getElementById('collapseTwoOne');
+            var panelOne = document.getElementById('collapseOneOne');
+            var basic_deductions_80c_validate = document.getElementById('basic_deductions_80c').value
+            var interest_on_deposits_in_saving_account_80tta_validate = document.getElementById('interest_on_deposits_in_saving_account_80tta').value
+
+            if(gross_salary_validate == "" || gross_salary_validate >= 399999999){
+                if(panelOne.classList.contains("in")){
+                    return true;
+                }else{
+                    var button = document.getElementById("collapseOneOneClick")
+                    button.click()
+                }
+            }else if(interest_on_deposits_in_saving_account_80tta_validate == "" || basic_deductions_80c_validate == "" || interest_on_deposits_in_saving_account_80tta_validate > 10000 || basic_deductions_80c_validate > 150000 ){
+                if(panelTwo.classList.contains("in")){
+                    return true;
+                }else{
+                    var button = document.getElementById("collapseTwoOneClick")
+                    button.click()
+                }
+            }
+        }
+    }
+
+
+    //Total Income
+    function totalIncome(){
+        //Variables to calculate Total Income
+        var gross_salary = document.getElementById('gross_salary');
+        var income_from_interest = document.getElementById('income_from_interest');
+        var income_from_other_sources = document.getElementById('income_from_other_sources');
+        var income_from_let_out_house_property = document.getElementById('income_from_let_out_house_property');
+        var interest_paid_on_home_loan_let_out = document.getElementById('interest_paid_on_home_loan_let_out');
+        var interest_paid_on_home_loan = document.getElementById('interest_paid_on_home_loan');
+
+        assesmentYear = document.querySelector('input[name="assessmentyear"]:checked').value;
+        //Based on Assessment year "maximum_deduction_on_interest_paid_on_home_loan" will change
+    if (assesmentYear == "2020-2021" || assesmentYear == "2019-2020" || assesmentYear == "2018-2019") {
+            maximum_deduction_on_interest_paid_on_home_loan = 200000;
+        }
+        else if(assesmentYear == "2017-2018"){
+            maximum_deduction_on_interest_paid_on_home_loan = 9999999;
+        }
+        else if(assesmentYear == "2016-2017"){
+            maximum_deduction_on_interest_paid_on_home_loan = 9999999;
+        }
+
+        //Formula For Total Income
+        var total_income = Number(gross_salary.value) + Number(income_from_interest.value) + Number(income_from_other_sources.value) -(Math.min(Number(maximum_deduction_on_interest_paid_on_home_loan), ((Math.min(Number(interest_paid_on_home_loan.value),Number(maximum_deduction_on_interest_paid_on_home_loan_self_occupied))) + Number(interest_paid_on_home_loan_let_out.value) + (Number(STANDARD_DEDUCTION_RATE_ON_INCOME_FROM_LET_OUT_PROPERTY - 1 ) * Number(income_from_let_out_house_property.value)))));
+
+        //Total Income
+        document.getElementById('total_income').innerHTML = delimitNumbers(Math.round(total_income));
+        return total_income;
+    }
+
+    //Deduction
+    function totalDeducation(){
+        //Variables to calculate Deduction
+        var basic_deductions_80c = document.getElementById('basic_deductions_80c');
+        var interest_on_deposits_in_saving_account_80tta = document.getElementById('interest_on_deposits_in_saving_account_80tta');
+        var donation_to_charity_80g = document.getElementById('donation_to_charity_80g');
+        var medical_insurance_premium_80d = document.getElementById('medical_insurance_premium_80d');
+        var interest_on_educational_loan_80e = document.getElementById('interest_on_educational_loan_80e');
+    var standard_deduction = 0;
+    
+    if(assesmentYear == "2020-2021"){
+      standard_deduction = 50000;
+    } else if (assesmentYear == "2019-2020"){
+      standard_deduction = 40000;
+    }else{
+      standard_deduction = 0;
+    }
+
+        //Formula For Deduction Medical Insurance 80D check
+        taxpayer = document.getElementById('dropdownMenuButton').innerHTML;
+        console.log(taxpayer)
+        assesmentYear = document.querySelector('input[name="assessmentyear"]:checked').value;
+        if((taxpayer == 'Male') || (taxpayer == 'Female')){
+
+            interest_on_deposits_in_saving_account_80tta_max = Math.min( Number(interest_on_deposits_in_saving_account_80tta.value) , 10000 )
+            console.log(interest_on_deposits_in_saving_account_80tta_max)
+
+            medical_insurance_premium_80d_max=Math.min(Number(medical_insurance_premium_80d.value),Number(55000))
+            console.log(medical_insurance_premium_80d_max)
+        }else if(taxpayer == 'Senior Citizen'){
+            if(assesmentYear == "2020-2021" || assesmentYear == "2019-2020"){
+                interest_on_deposits_in_saving_account_80tta_max = Math.min( Number(interest_on_deposits_in_saving_account_80tta.value) , 50000 )
+                medical_insurance_premium_80d_max = Math.min( Number(medical_insurance_premium_80d.value) , 100000 )
+            }else{
+                interest_on_deposits_in_saving_account_80tta_max = Math.min( Number(interest_on_deposits_in_saving_account_80tta.value) , 10000 )
+                medical_insurance_premium_80d_max = Math.min( Number(medical_insurance_premium_80d.value) , 60000 )
+            }
+        }else if(taxpayer == 'Super Senior Citizen'){
+      if(assesmentYear == "2020-2021" || assesmentYear == "2019-2020"){
+                medical_insurance_premium_80d_max = Math.min( Number(medical_insurance_premium_80d.value) , 100000 )
+                interest_on_deposits_in_saving_account_80tta_max = Math.min( Number(interest_on_deposits_in_saving_account_80tta.value) , 50000 )
+            }else{
+                interest_on_deposits_in_saving_account_80tta_max = Math.min( Number(interest_on_deposits_in_saving_account_80tta.value) , 10000 )
+                medical_insurance_premium_80d_max = Math.min( Number(medical_insurance_premium_80d.value) , 60000 )
+            }
+        }
+
+        basic_deductions_80c_max = Math.min( Number(basic_deductions_80c.value) , 150000 )
+       
+
+        //Formula For Deduction
+        var deductions = Number(basic_deductions_80c_max) + Number(interest_on_deposits_in_saving_account_80tta_max) + Number(donation_to_charity_80g.value) + Number(medical_insurance_premium_80d_max ) + Number(interest_on_educational_loan_80e.value) + Number(standard_deduction)
+
+        //Total Deduction
+        console.log(Number(basic_deductions_80c_max),Number(interest_on_deposits_in_saving_account_80tta_max),Number(donation_to_charity_80g.value),Number(medical_insurance_premium_80d_max ),Number(interest_on_educational_loan_80e.value),Number(standard_deduction))
+        document.getElementById('deductions').innerHTML = delimitNumbers(Math.round(deductions));
+        return deductions;
+    }
+
+    //HRA Exemption
+    function totalhraExemption(){
+        //Variables to calculate HRA Exemption
+        var basic_salary_received = document.getElementById('basic_salary_received');
+        var hra_received = document.getElementById('hra_received');
+        var total_rent_paid = document.getElementById('total_rent_paid');
+        var dearness_allowance_received = document.getElementById('dearness_allowance_received');
+
+        //Formula For HRA Exemption
+        var hraexemption = Math.min((Number(basic_salary_percentage_for_hra_for_city) * Number(basic_salary_received.value)), Number(hra_received.value) , Number(total_rent_paid.value) - ((Number(basic_salary_received.value) + Number(dearness_allowance_received.value)) * Number(Basic_salary_deduction_from_total_rent_paid)));
+
+        //HRA Exemption should not show -ve Value
+        if(hraexemption < 0){
+            hraexemption = 0;
+            document.getElementById('hraexemption').innerHTML = hraexemption;
+        }
+        else{
+            document.getElementById('hraexemption').innerHTML = delimitNumbers(Math.round(hraexemption));
+        }
+
+        return hraexemption;
+    }
+
+    //Net Taxable Income
+    function totalTaxableIncome(){
+
+        //Formula For Net Taxable Income
+        var nettaxableincome = totalIncome() - totalhraExemption() - totalDeducation()
+
+        //HRA Exemption should not show -ve Value
+        if(nettaxableincome < 0){
+            nettaxableincome = 0;
+            document.getElementById('nettaxableincome').innerHTML = nettaxableincome;
+        }
+        else{
+            //Net Taxable Income
+            document.getElementById('nettaxableincome').innerHTML = delimitNumbers(Math.round(nettaxableincome));
+        }
+        return nettaxableincome;
+    }
+
+    //Slab Calculation
+    function totalTaxPayableBasedOnSlab(){
+        //Loop for Slab Calculation
+        var totalTaxableIncomeValue = totalTaxableIncome();
+        var Tax = 0;
+        for(var slab = 1 ; slab <=4 && totalTaxableIncomeValue > 0 ; slab++) {
+            assesmentYear = document.querySelector('input[name="assessmentyear"]:checked').value;
+            taxpayer = document.getElementById('dropdownMenuButton').innerHTML;
+            taxValueBasedOnSlab(taxpayer,assesmentYear,slab);
+            if(totalTaxableIncomeValue > minimum_income_amount ){
+                var slabtax = Math.max( Math.min(Number(maximum_income_amount) , Number(totalTaxableIncomeValue))- Number(minimum_income_amount) , 0 ) * (tax_rate);
+                Tax += slabtax;
+            }
+        }
+
+
+        //Tax Rebate if Income between 300000 and 500000
+        if (((totalTaxableIncomeValue <=500000)) && (taxpayer !== "Super Senior Citizen") && (assesmentYear == "2020-2021")){
+            Tax = Math.max((Tax - 12500) , 0);
+        }
+        else if (((totalTaxableIncomeValue <=350000)) && (taxpayer !== "Super Senior Citizen") && (assesmentYear == "2019-2020")){
+            Tax = Math.max((Tax - 2500) , 0);
+        }else if (((totalTaxableIncomeValue <=350000)) && (taxpayer !== "Super Senior Citizen") && (assesmentYear == "2018-2019")){
+            Tax = Math.max((Tax - 2500) , 0);
+        }else if(((totalTaxableIncomeValue <=500000)) && (taxpayer !== "Super Senior Citizen") && (assesmentYear == "2017-2018")){
+            Tax = Math.max((Tax - 5000) , 0);
+        }
+        else if(((totalTaxableIncomeValue <=500000)) && (taxpayer !== "Super Senior Citizen") && (assesmentYear == "2016-2017")){
+            Tax = Math.max((Tax - 2000) , 0);
+        }
+
+        //Surcharge if Income between 5000000 and 10000000
+        if (((totalTaxableIncomeValue > 5000000) && (totalTaxableIncomeValue <=10000000)) && (assesmentYear == "2020-2021")){
+            if((Tax*0.1) > ((totalTaxableIncomeValue - 5000000)*(70/100)))
+            {
+                Tax = Math.min(Tax + (70/100 * (totalTaxableIncomeValue - 5000000)), Tax * 110/100 );
+            }else{
+                Tax = Tax * 110/100;
+            }
+        }
+
+        if (((totalTaxableIncomeValue > 5000000) && (totalTaxableIncomeValue <=10000000)) && (assesmentYear == "2019-2020")){
+            if((Tax*0.1) > ((totalTaxableIncomeValue - 5000000)*(70/100)))
+            {
+                Tax = Math.min(Tax + (70/100 * (totalTaxableIncomeValue - 5000000)), Tax * 110/100 );
+            }else{
+                Tax = Tax * 110/100;
+            }
+        }
+
+        if (((totalTaxableIncomeValue > 5000000) && (totalTaxableIncomeValue <=10000000)) && (assesmentYear == "2018-2019")){
+            if((Tax*0.1) > ((totalTaxableIncomeValue - 5000000)*(70/100)))
+            {
+                Tax = Math.min(Tax + (70/100 * (totalTaxableIncomeValue - 5000000)), Tax * 110/100 );
+            }else{
+                Tax = Tax * 110/100;
+            }
+        }
+        if ((totalTaxableIncomeValue > 10000000) && (assesmentYear !== "2016-2017")){
+            if((Tax*0.15) > ((totalTaxableIncomeValue - 10000000)*(70/100)))
+            {
+                if(assesmentYear == "2020-2021")
+                {
+                    Tax = Math.min(((Tax - ((totalTaxableIncomeValue - 10000000)*(30/100)))*(110/100)) + (totalTaxableIncomeValue - 10000000) , Tax * 115/100 );
+                }
+                else if(assesmentYear == "2019-2020")
+                {
+                    Tax = Math.min(((Tax - ((totalTaxableIncomeValue - 10000000)*(30/100)))*(110/100)) + (totalTaxableIncomeValue - 10000000) , Tax * 115/100 );
+                }
+                else if(assesmentYear == "2018-2019")
+                {
+                    Tax = Math.min(((Tax - ((totalTaxableIncomeValue - 10000000)*(30/100)))*(110/100)) + (totalTaxableIncomeValue - 10000000) , Tax * 115/100 );
+                }
+                else{
+                    Tax = Math.min(Tax + (70/100 * (totalTaxableIncomeValue - 10000000)) , Tax * 115/100);
+                }
+
+            }else{
+                Tax = Tax * 115/100;
+            }
+        }
+        if ((totalTaxableIncomeValue > 10000000) && (assesmentYear == "2016-2017")){
+            if((Tax*0.12) > ((totalTaxableIncomeValue - 10000000)*(70/100)))
+            {
+                Tax = Math.min(Tax + (70/100 * (totalTaxableIncomeValue - 10000000)) , Tax * 112/100);
+            }else{
+                Tax = Tax * 112/100;
+            }
+        }
+
+        //Income Tax Payable
+        if(assesmentYear == "2020-2021"){
+            document.getElementById('incometaxpayable').innerHTML = delimitNumbers(Math.round(Tax*(104/100)));
+            document.getElementById('incometaxpayablebold').innerHTML = delimitNumbers(Math.round(Tax*(104/100)));
+        }
+        else if(assesmentYear == "2019-2020"){
+            document.getElementById('incometaxpayable').innerHTML = delimitNumbers(Math.round(Tax*(104/100)));
+            document.getElementById('incometaxpayablebold').innerHTML = delimitNumbers(Math.round(Tax*(104/100)));
+        }else{
+            document.getElementById('incometaxpayable').innerHTML = delimitNumbers(Math.round(Tax*(103/100)));
+            document.getElementById('incometaxpayablebold').innerHTML = delimitNumbers(Math.round(Tax*(103/100)));
+        }
+    }
+
+    //Comma Separator
+    function delimitNumbers(str) {
+        var x=str;
+        x=x.toString();
+        var lastThree = x.substring(x.length-3);
+        var otherNumbers = x.substring(0,x.length-3);
+        if(otherNumbers != '')
+            lastThree = ',' + lastThree;
+        var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+        return res;
+    }
+</script>
+
+
+
+
+
+<h2>How to Calculate Income Tax on Salary with an Example</h2>
+<p>The easiest way to calculate your tax liability is through an online income tax calculator. However, it can be done manually as well.</p>
+<p>Let us consider the example of Mr. Dutta whose earnings include a basic salary of <strong>Rs.37,500 per month (i.e., Rs.4.5 lakh per annum) </strong>in the financial year 2019-2020.</p>
+
+<ul>
+<li>His salary also includes House Rent Allowance (HRA) of <strong>Rs.20,000 per month or Rs.2.4 lakh per year</strong>.</li>
+<li>The Leave Travel Allowance (LTA) is <strong>Rs.15,000 on an annual basis</strong>.</li>
+<li>There is also a special allowance component of <strong>Rs.10,000 per month (i.e., Rs.1.2 lakh per year)</strong>.</li>
+<li>Mr. Dutta stays in Kolkata and pays rent of <strong>Rs.15,000 per month, which amounts to Rs.1.80 lakh per year</strong>.</li>
+<li> There is also an EPF component (Mr.Dutta’s share) that is deducted from his salary per month. This is equivalent to 12% of his basic salary on a monthly basis, i.e., Rs.(37,500 * 0.12) = Rs.4,500. <strong>On an annual scale this will amount to Rs.54,000.</strong></li>
+</ul>
+
+
+<h2>Step 1: Calculation of Taxable HRA</h2>
+<p>The first step is to identify the HRA chargeable to tax. Mr. Dutta uses an online HRA Calculator tool to determine the taxable component of his HRA. The manual method of calculating the taxable HRA component is not very complicated either. In this case, it is calculated as shown below:</p>
+<p><em>The lowest value among the following will be exempt from tax:</em></p>
+
+<ul>
+<li>
+<em>50% of Mr. Dutta’s annual basic salary = Rs.(4.5 lakh * 0.5) = </em><em><strong>Rs.2.25 lakh</strong></em>
+</li>
+<li>
+<em>HRA received on an annual basis =</em><em><strong> Rs.2.4 lakh</strong></em>
+</li>
+<li>
+<em>Rent that is paid in excess of 10% of annual basic salary = Rs.(1.8 lakh - (0.1 * 4.5 lakh)) = </em><em><strong>Rs.1.35 lakh</strong></em>
+</li>
+</ul>
+
+<p><em><strong>Hence, the total taxable HRA = Rs.2.4 lakh – Rs.1.35 lakh = Rs.1.05 lakh</strong></em></p>
+<h2>Step 2: Calculation of Taxable Income from Salary</h2>
+<p>The annual gross income from his salary is outlined in the table below:</p>
+<style type="text/css">
+	.hungry-table{
+		overflow-y: hidden;
+    width: 100%;
+    color:#00ff5c;
+
+
+	}
+	.table-bordered,.table-header{
+		background-color: #555;
+    padding: 5px;
+    color: #fff;
+	}
+	.table-bordered,.table-header strong{
+	color:#ffe200}
+	.table-bordered>thead>tr>th, .table-bordered>tbody>tr>td {
+    border: 1px solid #ddd;
+    text-align: center;
+
+}
+.table-bordered>thead>tr>th>strong, .table-bordered>tbody>tr>td>strong{
+	color:#ffe200
+}
+</style>
+<div class="hungry-table">
+<table class="table table-bordered table-striped">
+<tr>
+<thead>
+<tr>
+        <th class="table-header"><strong>Component</strong></th>
+<th class="table-header"><strong>Total Amount</strong></th>
+<th class="table-header"><strong>Exemption</strong></th>
+<th class="table-header"><strong>Taxable Amount</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic Salary</td>
+<td>Rs.4.5 lakh</td>
+<td>-</td>
+<td>Rs.4.5 lakh (A)</td>
+</tr>
+<tr>
+<td>HRA</td>
+<td>Rs.2.4 lakh</td>
+<td>Rs.1.35 lakh</td>
+<td>Rs.1.05 lakh (B)</td>
+</tr>
+<tr>
+<td>Special Allowance</td>
+<td>Rs.1.2 lakh</td>
+<td>-</td>
+<td>Rs.1.2 lakh (C)</td>
+</tr>
+<tr>
+<td>LTA</td>
+<td>Rs.15,000</td>
+<td>Rs.10,000 (travel bills submitted)</td>
+<td>Rs.5,000 (D)</td>
+</tr>
+<tr>
+<td>Standard Deduction*</td>
+<td> </td>
+<td>Rs.50,000 (E)</td>
+<td> </td>
+</tr>
+<tr>
+<td>Gross Income from Salary</td>
+<td>
+Rs.8.25 lakh (sum of the above rows in this column)</td>
+<td> </td>
+<td>A + B + C + D - E = Rs.6.3 lakh
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>*Standard deduction was proposed to be Rs.40,000 in the Union Budget 2018. In the Interim Budget of 2019, it was increased to Rs.50,000.</p>
+
+
+
+
+</div>
+<h2>Step 3: Calculation of Total Deductions</h2>
+<p>Now let us take a look at the investments made by Mr. Dutta.</p>
+
+<ul>
+<li>On an annual basis, consider that he has earned interest of <strong>Rs.9,000 </strong>from a savings account. </li>
+<li>He has also made investments in Public Provident Fund (PPF) and Equity Linked Savings Scheme (ELSS) during the financial year 2019-20. These investments amount to <strong>Rs.50,000</strong> for PPF and <strong>Rs.15,000</strong> towards ELSS.</li>
+<li>He is also paying premium worth <strong>Rs.10,000</strong> for a life insurance policy and <strong>Rs.12,500 </strong>for a health insurance policy.</li>
+</ul>
+
+<p>Mr. Dutta can claim tax deduction for each of these investments, as shown below:</p>
+
+<div class="hungry-table">
+<table class="table table-bordered table-striped">
+<thead> 
+<tr>
+<th class="table-header"><strong>Section</strong></th>
+<th class="table-header"><strong>Maximum Deduction Allowed</strong></th>
+<th class="table-header"><strong>Investments Eligible for Tax Deduction</strong></th>
+<th class="table-header"><strong>Deductions Claimed by Taxpayer</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+<td>80C</td>
+<td>Rs.1.5 lakh</td>
+<td>PPF – Rs.50,000 (L)
+ELSS – Rs.15,000 (M)
+Life insurance – Rs.10,000 (N)
+EPF contribution deducted by employer – Rs.54,000 (O)
+</td>
+<td>L + M + N + O, up to a maximum limit of Rs.1.5 lakh
+= <strong>Rs.1.29 lakh
+</td>
+</tr>
+<tr>
+<td>80D</td>
+<td>Rs.25,000 for self and Rs.50,000 for parents</td>
+<td>Health insurance – Rs.12,500</td>
+<td><strong>Rs.12,500</strong></td>
+</tr>
+<tr>
+<td>80TTA</td>
+<td>Rs.10,000</td>
+<td>Interest from savings account – Rs.9,000</td>
+<td><strong>Rs.9,000</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2>Step 4: Calculation of Gross Income that is Taxable</h2>
+<p>The next step is the calculation of the gross taxable income for Mr. Dutta for the financial year 2019-20.</p>
+
+<div class="hungry-table">
+<table class="table table-bordered table-striped">
+<tbody>
+<tr>
+<td>Gross Taxable Income from Salary</td>
+<td>Rs.6.3 lakh</td>
+</tr>
+<tr>
+<td>Income from Other Sources</td>
+<td>Rs.9,000 (from savings account interest)</td>
+</tr>
+<tr>
+<td>Gross Total Income</td>
+<td>Rs.6.39 lakh</td>
+</tr>
+<tr>
+<td colspan="2">
+Deductions under
+</td>
+</tr>
+<tr>
+<td>80C</td>
+<td>Rs.1.29 lakh</td>
+</tr>
+<tr>
+<td>80D</td>
+<td>Rs.12,500</td>
+</tr>
+<tr>
+<td>80TTA</td>
+<td>Rs.9,000</td>
+</tr>
+<tr>
+<td><strong>Gross Taxable Income (Gross Total Income – Total Deductions)</strong></td>
+<td><strong>Rs.4,88,500</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2>Step 5: Calculation of Income Tax Liability</h2>
+<p>The final step is to analyse the tax slabs and identify Mr. Dutta’s tax liability. The amount of tax he needs to pay is dependent on the tax slab that his income falls under. The tax slabs for the financial years 2019-2020 and 2018-2019 are as shown below. The amount due to be paid by Mr. Dutta is also indicated in the following table:</p>
+
+<div class="hungry-table">
+<table class="table table-bordered table-striped">  
+<thead>
+<tr>
+<th class="table-header"><strong>Income Slab</strong></th>
+<th class="table-header"><strong>Rate of Taxation</strong></th>
+<th class="table-header"><strong>Amount to be Paid</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Below Rs.2.5 lakh</td>
+<td>No tax</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Between Rs.2.5 lakh and Rs.5 lakh</td>
+<td>5%</td>
+<td>5% of (Rs.4,88,500 less Rs.2.5 lakh) = Rs.11,925</td>
+</tr>
+<tr>
+<td>Between Rs.5 lakh and Rs.10 lakh</td>
+<td>20%</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Rs.10 lakh and above</td>
+<td>30%</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Cess</td>
+<td>4% of total tax</td>
+<td>11,925 * 0.04 = Rs.477</td>
+</tr>
+<tr>
+<td><strong>Total Income Tax Liability</strong></td>
+<td><strong>Rs.11,925 + Rs.477</strong></td>
+<td><strong>Rs.12,402</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>*The above tax slabs are applicable to taxpayers below 60 years of age</em></p>
+<p>Mr. Dutta is liable to pay the tax for the financial year 2019-2020 and will have to file the income tax returns during the assessment year 2020-2021.</p>
+<p>Now that you have a clear idea of the income tax calculation on salary, here are some common income tax terms you may be interested in understanding:</p>
+<script src="https://blog.bankbazaar.com/wp-content/themes/iconic-one/js/baseScripts.js" type="text/javascript"></script>
+<h2>What is the difference between Exemption and Deduction?</h2>
+<p>Both exemption and deduction help reduce your tax liability, but these are availed under different sections of the Income Tax Act.</p>
+
+<ul>
+<li>
+<strong>Deduction</strong> is a reduction in the total taxable income based on Section 80 and Chapter VI-A. Specific kinds of spending such as investment in life insurance policies and payment of children’s tuition fee help you avail a tax deduction.</li>
+<li>
+<strong>Exemption</strong> is a specific amount that is excluded from the gross total income before calculating tax. Exemptions are available under Sections 10 and 54. Interest earned from tax-free bonds and salary components like LTA are examples of exemptions.</li>
+</ul>
+
+</body>
+</html>
